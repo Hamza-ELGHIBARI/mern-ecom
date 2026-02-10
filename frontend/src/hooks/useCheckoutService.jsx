@@ -28,7 +28,6 @@ export default function useCheckoutService() {
             return data;
         } catch (err) {
             setError(err.message);
-            throw err;
         } finally {
             setLoading(false);
         }
@@ -47,7 +46,6 @@ export default function useCheckoutService() {
             });
         } catch (err) {
             setError(err.message);
-            throw err;
         } finally {
             setLoading(false);
         }

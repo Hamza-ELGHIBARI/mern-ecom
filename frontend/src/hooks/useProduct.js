@@ -10,7 +10,8 @@ export default function useProduct(productId) {
       try {
         const data = await adminApi.getProductById(productId);
         setProduct(data);
-      } finally {
+      }
+       finally {
         setLoading(false);
       }
     }

@@ -12,7 +12,6 @@ export default function useAdminUserService() {
       return await adminApi.getUsers();
     } catch (err) {
       setError(err.message);
-      throw err;
     } finally {
       setLoading(false);
     }
@@ -25,7 +24,6 @@ export default function useAdminUserService() {
       return await adminApi.addUser(data);
     } catch (err) {
       setError(err.message);
-      throw err;
     } finally {
       setLoading(false);
     }
@@ -38,7 +36,6 @@ export default function useAdminUserService() {
       return await adminApi.updateUser(id, data);
     } catch (err) {
       setError(err.message);
-      throw err;
     } finally {
       setLoading(false);
     }
@@ -51,7 +48,6 @@ export default function useAdminUserService() {
       return await adminApi.deleteUser(id);
     } catch (err) {
       setError(err.message);
-      throw err;
     } finally {
       setLoading(false);
     }

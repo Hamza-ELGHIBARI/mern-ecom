@@ -7,7 +7,7 @@ export default function CategoryEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { category, loading } = useCategory(id);
-
+  const [error, setError] = useState(null);
   const [name, setName] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -26,7 +26,10 @@ export default function CategoryEdit() {
     try {
       await adminApi.updateCategory(id, { name });
       navigate("/admin/categories");
-    } finally {
+    } catch(err) {
+      setError(err.message);
+    }
+    finally {
       setSaving(false);
     }
   }
@@ -34,7 +37,7 @@ export default function CategoryEdit() {
   return (
     <div className="p-8 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Modifier catégorie</h1>
-
+  {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           value={name}

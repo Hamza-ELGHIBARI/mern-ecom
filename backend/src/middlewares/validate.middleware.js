@@ -1,18 +1,17 @@
+
 const validate = (schema) => (req, res, next) => {
   const { error, value } = schema.validate(req.body, {
-    abortEarly: false, // retourne toutes les erreurs
-    stripUnknown: true, // supprime les champs inattendus
+    abortEarly: false,
+    stripUnknown: true,
   });
 
   if (error) {
-    return res.status(400).json({
-      error: "Validation failed",
-      details: error.details.map((d) => d.message),
-    });
+    error.statusCode = 400;
+    return next(error); // on laisse errorHandler gérer
   }
 
-  req.body = value; // payload nettoyé
+  req.body = value;
   next();
 };
-
 module.exports = validate;
+

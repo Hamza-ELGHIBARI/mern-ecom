@@ -4,6 +4,7 @@ import MainLayout from "../../components/layouts/MainLayout";
 import Button from "../../components/ui/Button";
 import useCheckoutService from "../../hooks/useCheckoutService";
 import CartContext from "../../contexts/CartContext";
+import toast from "react-hot-toast";
 
 export default function ChooseAddressPage() {
     const navigate = useNavigate();
@@ -24,11 +25,11 @@ export default function ChooseAddressPage() {
     };
 
     const handleProceed = () => {
-        if (selectedIndex === null) return alert("Veuillez sélectionner une adresse");
+        if (selectedIndex === null) return  toast.error("Veuillez séléctionnez une addresse");;
         navigate("/client/checkout", { state: { addressIndex: selectedIndex } });
     };
 
-    if (loading) return <MainLayout><p className="text-center py-20">Chargement...</p></MainLayout>;
+    if (loading) return <p className="text-center py-20">Chargement...</p>;
 
     return (
         <>
@@ -48,10 +49,10 @@ export default function ChooseAddressPage() {
 
             <form className="mb-6" onSubmit={handleAddAddress}>
                 <h3 className="font-semibold mb-2">Ajouter une adresse</h3>
-                <input placeholder="Rue" value={newAddress.street} onChange={e => setNewAddress({...newAddress, street: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded"/>
-                <input placeholder="Ville" value={newAddress.city} onChange={e => setNewAddress({...newAddress, city: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded"/>
-                <input placeholder="Code postal" value={newAddress.zip} onChange={e => setNewAddress({...newAddress, zip: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded"/>
-                <input placeholder="Pays" value={newAddress.country} onChange={e => setNewAddress({...newAddress, country: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded"/>
+                <input type="text" placeholder="Rue" value={newAddress.street} onChange={e => setNewAddress({...newAddress, street: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded" required/>
+                <input type="text" placeholder="Ville" value={newAddress.city} onChange={e => setNewAddress({...newAddress, city: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded" required/>
+                <input type="number" placeholder="Code postal" value={newAddress.zip} onChange={e => setNewAddress({...newAddress, zip: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded" required/>
+                <input type="text" placeholder="Pays" value={newAddress.country} onChange={e => setNewAddress({...newAddress, country: e.target.value})} className="border w-full mb-2 px-2 py-1 rounded" required/>
                 <button className="bg-blue-600 text-white px-4 py-2 rounded">Ajouter</button>
             </form>
 

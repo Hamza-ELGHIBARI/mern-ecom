@@ -11,7 +11,7 @@ export default function CartButton() {
 
   return (
     <>
-   { isAuthenticated && role=='client'  && <Link
+   { isAuthenticated && role=='client'  && (items.length>0) &&<Link
       to="/client/cart"
       className="fixed bottom-4 right-4 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-blue-700 z-50"
     >

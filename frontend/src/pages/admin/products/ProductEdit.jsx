@@ -10,7 +10,7 @@ export default function ProductEdit() {
 
   const { product, loading } = useProduct(id);
   const { categories } = useCategories();
-
+ const [error,setError]=useState(null);
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
 
@@ -53,7 +53,10 @@ export default function ProductEdit() {
 
       await adminApi.updateProduct(id, formData);
       navigate("/admin/products");
-    } finally {
+    } catch (err) {
+      setError(err.message);
+    }
+    finally {
       setSaving(false);
     }
   }
@@ -61,7 +64,7 @@ export default function ProductEdit() {
   return (
     <div className="p-8 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Modifier produit</h1>
-
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       {/* IMAGE ACTUELLE */}
       {product.image && (
         <img
