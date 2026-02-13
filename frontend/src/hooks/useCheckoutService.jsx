@@ -34,7 +34,6 @@ export default function useCheckoutService() {
     };
 
     const createOrder = async ({ addressIndex, items }) => {
-
         setLoading(true);
         setError(null);
         try {
